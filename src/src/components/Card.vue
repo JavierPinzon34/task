@@ -1,6 +1,6 @@
 <template>
   <b-col class="card_content" md="6" sm="12" lg="3">
-    <b-card :id="`card_${numero}`" class="card_item" @click="changeInfo(item ,numero)">
+    <b-card :id="`card_${numero}`" class="card_item" :class="{'is-active': item.key == keyCard}" @click="changeInfo(item ,numero)">
       <div class="title text-center">
         <h3>{{item.value}}</h3>
         <h5>{{item.title}}</h5>
@@ -19,8 +19,14 @@ import EventBus from '../bus'
 export default {
   data () {
     return {
-      selected: 0
+      selected: 0,
+      keyCard: ''
     }
+  },
+  created () {
+    EventBus.$on('card-select', (item) => {
+      this.keyCard = item
+    })
   },
   props: {
     item: {
@@ -36,7 +42,6 @@ export default {
     selectCard () {
       return this.selected
     }
-
   },
   mounted () {
     this.$el.addEventListener('click', this.changeInfo(this.item, this.numero))
@@ -47,6 +52,7 @@ export default {
       item.key = numero
       this.selected = numero
       EventBus.$emit('change-card', (item))
+      EventBus.$emit('card-select', (numero))
     }
   }
 }
@@ -54,17 +60,16 @@ export default {
 <style lang="scss">
   .card_content{
     .card_item{
+      border: unset;
       cursor: pointer;
       background-color: #F8FAFD;
       border-radius: 10px;
-      box-shadow: 0px 3px 6px #00000029;
-      border: 1px solid #448AFC;
       width: auto;
       .title{
         padding-bottom: 25px;
         h3{
           font-size: 45px;
-          color: #448AFC;
+          color: #A0B0CB;
           font-weight: 600;
         }
         h5{
@@ -88,6 +93,13 @@ export default {
             font-size: 16px;
           }
         }
+      }
+    }
+    .is-active{
+      box-shadow: 0px 3px 6px #00000029;
+      border: 2px solid #448AFC;
+      h3{
+        color: #448AFC !important;
       }
     }
   }

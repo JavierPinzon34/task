@@ -1,8 +1,9 @@
 <template>
-  <div class="pt-5 content_information">
+  <div class="pt-5 mt-4 content_information">
     <h4>{{cardInfo.title}}</h4>
-
-    <CardGraphics :content="cardInfo"/>
+    <b-row class="mt-4">
+      <CardGraphics :content="cardInfo"/>
+    </b-row>
   </div>
 </template>
 <script>
@@ -29,6 +30,7 @@ export default {
     h4{
       font-size: 22px;
       color: #636A76;
+      padding-left: 15px;
     }
   }
 </style>
