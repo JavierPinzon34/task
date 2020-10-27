@@ -8,6 +8,7 @@
         <Card class="mt-4" v-for="(item, index) in cards" :item="item" :key="index" :numero="index"/>
       </b-row>
       <ContentInformation />
+      <Modal />
     </div>
   </div>
 </template>
@@ -16,12 +17,14 @@ import NavBar from '../components/NavBar'
 import SelectProject from '../components/SelectProject'
 import Card from '../components/Card'
 import ContentInformation from '../components/ContentInformation'
+import Modal from '../components/Modal'
 export default {
   components: {
     NavBar,
     SelectProject,
     Card,
-    ContentInformation
+    ContentInformation,
+    Modal
   },
   data () {
     return {

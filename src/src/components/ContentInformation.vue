@@ -2,7 +2,11 @@
   <div class="pt-5 mt-4 content_information">
     <h4>{{cardInfo.title}}</h4>
     <b-row class="mt-4">
-      <CardGraphics :content="cardInfo"/>
+      <CardGraphics :content="data" v-for="(data, index) in cardInfo.text" :key="index"/>
+    </b-row>
+    <h4>Otros Indicadores</h4>
+    <b-row class="mt-4">
+      <CardGraphics :content="data" v-for="(data, index) in cardInfo.text" :key="index"/>
     </b-row>
   </div>
 </template>
